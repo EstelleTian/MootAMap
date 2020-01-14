@@ -6,7 +6,7 @@ var map = new AMap.Map('container', {
 AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
     var poiPicker = new PoiPicker({
         //city:'北京',
-        input: 'pickerInput'
+        input: 'searchipt'
     });
     //初始化poiPicker
     poiPickerReady(poiPicker);
