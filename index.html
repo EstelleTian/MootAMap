@@ -77,30 +77,30 @@
                         <div class="recommend-c clearfix">
                             <div class="item meishi-item" data-type="search" keyword="机场"
                                  data-spm-anchor-id="0.0.0.i6.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_food.png"
+                                <div class="img-c"><img src="img/search_airport.png"
                                                         data-spm-anchor-id="0.0.0.i2.5fd81c4ehDDuzm"></div>
                                 <p class="name ellipsis">机场</p></div>
                             <div class="item hotel-item" data-type="search" keyword="火车站">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_hotel.png"></div>
+                                <div class="img-c"><img src="img/search_train_station.png"></div>
                                 <p class="name ellipsis">火车站</p></div>
                             <div class="item scenic-item" data-type="search" keyword="汽车站">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_view.png"></div>
+                                <div class="img-c"><img src="img/search_bus_station.png"></div>
                                 <p class="name ellipsis">汽车站</p></div>
                             <div class="item cinema-item" data-type="search" keyword="服务区"
                                  data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_house.png"></div>
+                                <div class="img-c"><img src="img/search_service_area.png"></div>
                                 <p class="name ellipsis">服务区</p></div>
                             <div class="item cinema-item" data-type="search" keyword="比赛场馆"
                                  data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_house.png"></div>
+                                <div class="img-c"><img src="img/search_stadium.png"></div>
                                 <p class="name ellipsis">比赛场馆</p></div>
                             <div class="item cinema-item" data-type="search" keyword="运行中心"
                                  data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_house.png"></div>
+                                <div class="img-c"><img src="img/search_operation_center.png"></div>
                                 <p class="name ellipsis">运行中心</p></div>
                             <div class="item cinema-item" data-type="search" keyword="媒体中心"
                                  data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_hotel.png"></div>
+                                <div class="img-c"><img src="img/search_media.png"></div>
                                 <p class="name ellipsis">媒体中心</p></div>
                             <div class="item cinema-item" data-type="search" keyword="酒店"
                                  data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
@@ -108,7 +108,7 @@
                                 <p class="name ellipsis">酒店</p></div>
                             <div class="item cinema-item" data-type="search" keyword="医院"
                                  data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_house.png"></div>
+                                <div class="img-c"><img src="img/search_hospital.png"></div>
                                 <p class="name ellipsis">医院</p></div>
 
                         </div>
@@ -134,13 +134,54 @@
                     </div>
                 </div>
                 <div class="faves-panel panel"></div>
-                <div class="place-panel panel" style="display: none;"></div>
+                <div class="place-panel panel" style="display: block;"></div>
             </div>
         </section>
     </div>
 </section>
 
 <div id="container" class="map" tabindex="0"></div>
+<div id="dirBox" style="display: none">
+    <div id="planForm">
+        <ul class="tabs dir_tab col3 z-depth-1 clearfix" id="trafficTab">
+            <li>
+                <a id="carTab" class="palntype_tab icon-car icondirtip current" href="javascript:void(0)" data-type="car"></a>
+            </li>
+            <li>
+                <a id="busTab" class="palntype_tab icon-bus icondirtip" href="javascript:void(0)" data-type="bus"></a>
+            </li>
+            <li>
+                <a id="walkTab" class="palntype_tab icon-walk icondirtip" href="javascript:void(0)" data-type="walk"></a>
+            </li>
+        </ul>
+        <i class="dir_close iconfont icon-close" data-spm-anchor-id="0.0.0.i2.42e51c4eEIOYbj"></i>
+        <div class="line-search">
+            <div class="line-search-left icon_exchange" id="dir_exchange">
+                <i class="iconfont icon-switchroute"></i>
+            </div>
+            <div class="line-search-form">
+                <p class="line_serch_ipt line-search-from">
+                    <label>起 </label>
+                    <input type="text" class="dir_ipt" id="dir_from_ipt" dirtype="from" placeholder="请输入起点" value="" autocomplete="off" data-spm-anchor-id="0.0.0.i8.42e51c4eEIOYbj">
+                    <span class="del-item" style="display: none;"></span>
+                </p>
+                <div class="passList"></div>
+                <p class="line_serch_ipt line-search-to">
+                    <label>终 </label>
+                    <input type="text" class="dir_ipt" id="dir_to_ipt" dirtype="to" placeholder="请输入终点" value="" autocomplete="off">
+                    <span class="del-item" style="display: none;"></span>
+                </p>
+                <p class="line-search-submit">
+                    <a href="javascript:void(0)" class="line-search-clear none">清除路线</a>
+                    <a href="javascript:void(0)" class="dir_submit">开车去</a>
+                    <span class="fa-spin"></span>
+                </p>
+            </div>
+            <a href="javascript:void(0)" class="line-search-right icon_add" id="via_add"></a>
+        </div>
+    </div>
+</div>
+
 <div id="pickerBox">
     <!--<input id="pickerInput" placeholder="输入关键字选取地点"/>-->
     <div id="poiInfo"></div>

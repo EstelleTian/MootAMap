@@ -11,7 +11,7 @@ AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
     //初始化poiPicker
     poiPickerReady(poiPicker);
 });
-
+var marker;
 function poiPickerReady(poiPicker) {
 
     window.poiPicker = poiPicker;
@@ -20,7 +20,7 @@ function poiPickerReady(poiPicker) {
     poiPicker.on('poiPicked', function(poiResult) {
         var poi = poiResult.item;
         //输入框回填选中的值
-        document.getElementById("pickerInput").value = poi.name;
+        document.getElementById("searchipt").value = poi.name;
         var placeSearch = new AMap.PlaceSearch({
             city: '', // 兴趣点城市
             citylimit: true,  //是否强制限制在设置的城市内搜索
@@ -42,8 +42,12 @@ function poiPickerReady(poiPicker) {
         //回调函数
         function placeSearch_CallBack(data) {
             var poiArr = data.poiList.pois;
+            if( marker != undefined){
+                map.remove(marker);
+            }
+
             //添加marker
-            var marker = new AMap.Marker({
+            marker = new AMap.Marker({
                 map: map,
                 position: poiArr[0].location
             });
@@ -62,6 +66,17 @@ function poiPickerReady(poiPicker) {
 
     });
 
+}
+
+//输入提示
+var auto = new AMap.Autocomplete({
+    input: "tipinput"
+});
+
+AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+function select(e) {
+    placeSearch.setCity(e.poi.adcode);
+    placeSearch.search(e.poi.name);  //关键字查询查询
 }
 
 
