@@ -11,7 +11,7 @@ AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
     //初始化poiPicker
     poiPickerReady(poiPicker);
 });
-
+var marker;
 function poiPickerReady(poiPicker) {
 
     window.poiPicker = poiPicker;
@@ -42,8 +42,12 @@ function poiPickerReady(poiPicker) {
         //回调函数
         function placeSearch_CallBack(data) {
             var poiArr = data.poiList.pois;
+            if( marker != undefined){
+                map.remove(marker);
+            }
+
             //添加marker
-            var marker = new AMap.Marker({
+            marker = new AMap.Marker({
                 map: map,
                 position: poiArr[0].location
             });

@@ -11,6 +11,47 @@
 
 <body>
 <div id="container" class="map" tabindex="0"></div>
+<div id="dirBox">
+    <div id="planForm">
+        <ul class="tabs dir_tab col3 z-depth-1 clearfix" id="trafficTab">
+            <li>
+                <a id="carTab" class="palntype_tab icon-car icondirtip current" href="javascript:void(0)" data-type="car"></a>
+            </li>
+            <li>
+                <a id="busTab" class="palntype_tab icon-bus icondirtip" href="javascript:void(0)" data-type="bus"></a>
+            </li>
+            <li>
+                <a id="walkTab" class="palntype_tab icon-walk icondirtip" href="javascript:void(0)" data-type="walk"></a>
+            </li>
+        </ul>
+        <i class="dir_close iconfont icon-close" data-spm-anchor-id="0.0.0.i2.42e51c4eEIOYbj"></i>
+        <div class="line-search">
+            <div class="line-search-left icon_exchange" id="dir_exchange">
+                <i class="iconfont icon-switchroute"></i>
+            </div>
+            <div class="line-search-form">
+                <p class="line_serch_ipt line-search-from">
+                    <label>起 </label>
+                    <input type="text" class="dir_ipt" id="dir_from_ipt" dirtype="from" placeholder="请输入起点" value="" autocomplete="off" data-spm-anchor-id="0.0.0.i8.42e51c4eEIOYbj">
+                    <span class="del-item" style="display: none;"></span>
+                </p>
+                <div class="passList"></div>
+                <p class="line_serch_ipt line-search-to">
+                    <label>终 </label>
+                    <input type="text" class="dir_ipt" id="dir_to_ipt" dirtype="to" placeholder="请输入终点" value="" autocomplete="off">
+                    <span class="del-item" style="display: none;"></span>
+                </p>
+                <p class="line-search-submit">
+                    <a href="javascript:void(0)" class="line-search-clear none">清除路线</a>
+                    <a href="javascript:void(0)" class="dir_submit">开车去</a>
+                    <span class="fa-spin"></span>
+                </p>
+            </div>
+            <a href="javascript:void(0)" class="line-search-right icon_add" id="via_add"></a>
+        </div>
+    </div>
+</div>
+
 <div id="pickerBox">
     <input id="pickerInput" placeholder="输入关键字选取地点" />
     <div id="poiInfo"></div>
