@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/amapBox.css"/>
     <link rel="stylesheet" href="css/aroundbox.css"/>
     <link rel="stylesheet" href="css/banche.css"/>
+    <link rel="stylesheet" href="css/loginbox.css"/>
 </head>
 
 <body>
@@ -41,24 +42,50 @@
         <li role="presentation" class="nav-li click-item" data-key="lujingguihua"><a href="#">路径规划</a></li>
         <li role="presentation" class="nav-li click-item" data-key="bancheshike"><a href="#">班车时刻</a></li>
     </ul>
-    <div id="loginbox" class="usel loginbox" style="left: 1850px; top: 15px;">
-        <div class="avatar logintip" data-spm-anchor-id="0.0.0.i4.42e51c4e1iVbJz">  </div>
-        <div class="user-panel" style="opacity: 0; transform: translateY(0px); display: none;">
-            <div class="user-triangle"></div> <div class="user-head">  <div class="login-banner clearfix">
-            <div class="text-notice">
-                <p>登录后可享受</p> <p>更多贴心服务</p> </div>
-            <div class="login-btn">登录</div>
-        </div>
-        </div>
+    <div id="loginbox" class="usel loginbox" >
+        <div class="avatar logintip" data-spm-anchor-id="0.0.0.i9.6b8e1c4eNF8tCq"><img
+                src="//aos-cdn-image.amap.com/pp/avatar/16d/ee/fd/256106884.jpeg?ver=1545731879&amp;imgoss=1"
+                data-spm-anchor-id="0.0.0.i8.6b8e1c4eNF8tCq"></div>
+        <div class="user-panel" >
+            <div class="user-triangle"></div>
+            <div class="user-head" data-spm-anchor-id="0.0.0.i10.6b8e1c4eNF8tCq">
+                <div class="login-banner clearfix">
+                    <div class="text-notice"><p>登录后可享受</p>
+                        <p>更多贴心服务</p></div>
+                    <div class="login-btn" data-spm-anchor-id="0.0.0.i4.6b8e1c4ePJ5WXn">登录</div>
+                </div>
+                <div class="user-info">
+                    <a class="user-portrait" href="http://id.amap.com/user/" target="_blank">
+                        <img src="//aos-cdn-image.amap.com/pp/avatar/16d/ee/fd/256106884.jpeg?ver=1545731879&amp;imgoss=1">
+                    </a>
+                    <a class="user-name ellipsis" target="_blank">用户</a>
+                </div>
+            </div>
             <div class="func-list">
-                <div class="func-item road-book" data-type="road-book">
+                <div class="func-item shenfen" data-type="faves">
                     <i class="iconfont icon-lushu"></i>
-                    <span class="text-notice">路书<span class="red-point" style="display: inline;"></span> </span>
+                    <span class="text-notice">
+                        身份：<span class="shenfen-val">观众</span>
+                    </span>
+                    <ul class="dropdown-menu shenfen-list" >
+                        <li><a class="select" data-key="观众">观众</a></li>
+                        <li><a data-key="注册媒体">注册媒体</a></li>
+                        <li><a data-key="运动员">运动员</a></li>
+                        <li><a data-key="奥林匹克大家庭">奥林匹克大家庭</a></li>
+                    </ul>
+                </div>
+                <div class="func-item history" data-type="faves">
+                    <i class="iconfont icon-history"></i>
+                    <span class="text-notice">历史出行记录</span>
+                </div>
+
+
+                <div class="func-item quit-login" data-type="quit-login">
+                    <i class="iconfont icon-exit"></i>
+                    <span class="text-notice">退出登录</span>
                 </div>
             </div>
         </div>
-        <div class="recommend_entry" id="to_lushu" style="opacity: 0; display: none; transform: translateY(0px);">
-            <div class="recom_close"> <i class="iconfont icon-close" data-spm-anchor-id="0.0.0.i0.42e51c4e1iVbJz"></i> </div> </div>
     </div>
 </div>
 <div class="body">
@@ -542,6 +569,7 @@
 <script type="text/javascript" src="plugins/bootstrap-submenu/js/bootstrap-hover-dropdown.min.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript" src="js/banche.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
 
 </body>
 

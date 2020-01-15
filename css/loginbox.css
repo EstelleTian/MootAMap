@@ -1,0 +1,329 @@
+#loginbox {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    z-index: 115;
+    right: 50px;
+    top: 15px;
+}
+
+#loginbox .avatar {
+    width: 46px;
+    height: 46px;
+    background: url("../img/defavatar.png") 50% no-repeat;
+    cursor: pointer;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12)
+}
+
+#loginbox .avatar img {
+    width: 46px;
+    height: 46px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%
+}
+
+#loginbox .avatar img:hover {
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12)
+}
+
+#loginbox .user-panel {
+    position: absolute;
+    display: none;
+    width: 250px;
+    background-color: #fff;
+    color: #5f6477;
+    font-size: 13px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    top: 58px;
+    right: 0
+}
+
+#loginbox .user-panel .user-triangle {
+    position: absolute;
+    top: -4px;
+    right: 18px;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #52acf6;
+    border-top: 0
+}
+
+#loginbox .user-panel .user-head {
+    background-color: #52acf6;
+    padding: 14px;
+    color: #fff;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0
+}
+
+#loginbox .user-panel .user-head .user-info {
+    overflow: hidden;
+    zoom: 1
+}
+
+#loginbox .user-panel .user-head .user-info a {
+    display: inline-block;
+    text-decoration: none;
+    float: left;
+    color: #e3f2fd
+}
+
+#loginbox .user-panel .user-head .user-info a:hover {
+    color: #fff
+}
+
+#loginbox .user-panel .user-head .user-info .user-portrait {
+    width: 34px;
+    height: 34px;
+    /*border: 2px solid #fff;*/
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: url("../img/defavatar.png") 50% no-repeat
+}
+
+#loginbox .user-panel .user-head .user-info .user-portrait img {
+    width: 34px;
+    height: 34px
+}
+
+#loginbox .user-panel .user-head .user-info .user-name {
+    line-height: 40px;
+    margin: 0 14px;
+    width: 134px;
+    vertical-align: top
+}
+
+#loginbox .user-panel .user-head .user-info .user-edit {
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top
+}
+#loginbox .user-panel .user-head .login-banner {
+    display: none;
+}
+
+#loginbox .user-panel .user-head .login-banner .text-notice {
+    float: left;
+    margin: 0 20px;
+    line-height: 20px;
+    font-size: 12px
+}
+
+
+#loginbox .user-panel .user-head .login-banner .login-btn {
+    float: right;
+    width: 80px;
+    height: 28px;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 28px;
+    text-align: center;
+    margin-top: 4px;
+    cursor: pointer
+}
+
+#loginbox .user-panel .user-head .login-banner .login-btn:hover {
+    background-color: #45b7fe
+}
+
+#loginbox .func-list {
+    padding: 5px 0;
+    position: relative;
+}
+#loginbox .func-list .shenfen-list{
+    top: 30px;
+    left: 80px;
+}
+
+#loginbox .func-list .func-item {
+    padding: 0 20px;
+    line-height: 34px;
+    overflow: hidden;
+    zoom: 1;
+    cursor: pointer
+}
+#loginbox .func-list .func-item .shenfen {
+    display: inline-block;
+}
+
+.shenfen-list a.select {
+    color: #52acf6;
+}
+
+#loginbox .func-list .func-item .text-notice {
+    display: inline-block;
+    float: left;
+    position: relative
+}
+
+#loginbox .func-list .func-item.set-theme .text-notice {
+    width: 186px
+}
+
+#loginbox .func-list .func-item.set-theme .text-notice b {
+    display: inline-block;
+    color: #b6b7b9;
+    font-size: 12px;
+    font-weight: 400;
+    float: right
+}
+
+#loginbox .func-list .func-item.set-faves {
+    cursor: pointer
+}
+
+#loginbox .func-list .func-item.set-faves.unable {
+    filter: Gray;
+    -webkit-filter: grayscale(100%);
+    cursor: not-allowed
+}
+
+#loginbox .func-list .func-item.set-faves .check-btn {
+    display: inline-block;
+    float: right;
+    text-align: center
+}
+
+#loginbox .func-list .func-item .red-point {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #ff1f08;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    top: 8px;
+    right: -8px;
+    display: none
+}
+
+#loginbox .func-list .func-item .iconfont {
+    display: inline-block;
+    float: left;
+    margin-right: 7px;
+    font-size: 16px;
+    color: #7c8196
+}
+
+#loginbox .func-list .func-item.set-faves .icon-check {
+    margin-right: 0;
+    color: #b0bec5
+}
+
+#loginbox .func-list .func-item.set-faves.checked .icon-check {
+    color: #0f89f5
+}
+
+#loginbox .func-list .func-item.faves .icon-lush {
+    font-size: 17px
+}
+
+#loginbox .func-list .func-item:hover .iconfont, #loginbox .func-list .func-item:hover .text-notice {
+    color: #009cf9
+}
+
+#loginbox .func-list .func-item.set-faves.checked .icon-star {
+    color: #ffae00
+}
+
+#loginbox .func-list .func-item:hover .icon-check {
+    color: #b0bec5
+}
+
+#loginbox .func-list .func-item.set-faves.checked:hover .icon-check {
+    color: #0f89f5
+}
+
+.theme_item {
+    float: left;
+    margin: 4px 6px
+}
+
+.theme_item:last-child {
+    margin-right: 0
+}
+
+.theme_item .theme_img {
+    position: relative;
+    height: 42px;
+    width: 56px;
+    border: 1px solid #dbdee2;
+    border-radius: 3px;
+    cursor: pointer;
+    background: url(../img/theme_1.png);
+    background-size: 56px 42px
+}
+
+.theme_item.theme_2 .theme_img {
+    background: url(../img/theme_2.png)
+}
+
+.theme_item.theme_3 .theme_img {
+    background: url(../img/theme_3.png)
+}
+
+.theme_item.cur .theme_img {
+    border: 1px solid #009cf9
+}
+
+.theme_check {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 16px;
+    background: #009cf9;
+    bottom: 0;
+    opacity: .85
+}
+
+.theme_item.cur .theme_check {
+    display: block
+}
+
+#loginbox .func-list .func-item .theme_check .iconfont {
+    margin: 0;
+    height: 16px;
+    line-height: 16px;
+    color: #fff;
+    font-weight: bolder;
+    position: absolute;
+    left: 20px;
+    font-size: 12px
+}
+
+.theme_item_name {
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 5px
+}
+
+.theme_item.cur .theme_item_name {
+    color: #009cf9
+}
