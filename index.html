@@ -493,7 +493,14 @@
     </div>
     <!--班车时刻输入模块-->
     <div class="filtercanvas bancheshike hide">
-        <div class="panel panel-default">
+        <div class="input-card" style="width:18rem;">
+            <div class="input-item">
+                <div class="input-item-prepend"><span class="input-item-text">线路名称</span></div>
+                <input id="busLineName" type="text" value="">
+            </div>
+            <input id="banche-search" type="button" class="btn" value="查询">
+        </div>
+        <div class="panel panel-default jichangbashi-panel hide">
             <!-- Default panel contents -->
             <div class="panel-heading">2月15日-2月18日(Feb 15 - Feb 18)</div>
             <div class="panel-body table-container"></div>
@@ -523,7 +530,7 @@
 <!--</div>-->
 <!--</div>-->
 <script type="text/javascript"
-        src='https://webapi.amap.com/maps?v=1.4.15&key=dcfd6955a1af7e5eda471cd4bf631724&plugin=AMap.Autocomplete&plugin=AMap.CitySearch&plugin=AMap.Driving&plugin=AMap.Transfer&plugin=AMap.Walking'></script>
+        src='https://webapi.amap.com/maps?v=1.4.15&key=dcfd6955a1af7e5eda471cd4bf631724&plugin=AMap.Autocomplete&plugin=AMap.CitySearch&plugin=AMap.Driving&plugin=AMap.Transfer&plugin=AMap.Walking&plugin=AMap.LineSearch'></script>
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 <!-- UI组件库 1.0 -->
 <script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>

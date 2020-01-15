@@ -5,7 +5,7 @@ var cityinfo;
 var driving;
 var transfer;
 var walking;
-
+var linesearch;
 var Map = (function(){
     var init = function () {
         $('.dropdown-toggle').dropdown();
@@ -18,6 +18,9 @@ var Map = (function(){
         listenItemClick();
         //监听线路规划
         listenRoute();
+        //监听班车查询
+        listenBanche();
+
     }
 
     var initMap = function ( key ) {
@@ -25,6 +28,8 @@ var Map = (function(){
         $("#routeInfo").html("");
         $("#dir_from_ipt").val("");
         $("#dir_to_ipt").val("");
+        $("#busLineName").val("");
+        $(".jichangbashi-panel").addClass("hide");
         //初始化地图实例
         map = new AMap.Map('container', {
             resizeEnable: true,
@@ -93,24 +98,25 @@ var Map = (function(){
                        //          console.log('失败：' + result)
                        //      }
                        //  });
-                    }else if( key == "bancheshike" ){
-                        var driving2 = new AMap.Driving({
-                             map: map,
-                             panel: ""
-                         });
-                         // 根据起终点名称规划驾车导航路线
-                         driving2.search([
-                             {keyword: "北京航空航天大学", city:''},
-                             {keyword: "北京首都机场", city:''}
-                         ], function(status, result) {
-                             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
-                             if (status === 'complete') {
-                                 console.log('完成')
-                             } else {
-                                 console.log('失败：' + result)
-                             }
-                         });
                     }
+                    // else if( key == "bancheshike" ){
+                    //     var driving2 = new AMap.Driving({
+                    //          map: map,
+                    //          panel: ""
+                    //      });
+                    //      // 根据起终点名称规划驾车导航路线
+                    //      driving2.search([
+                    //          {keyword: "北京航空航天大学", city:''},
+                    //          {keyword: "北京首都机场", city:''}
+                    //      ], function(status, result) {
+                    //          // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+                    //          if (status === 'complete') {
+                    //              console.log('完成')
+                    //          } else {
+                    //              console.log('失败：' + result)
+                    //          }
+                    //      });
+                    // }
                 }else{
                     console.log(result)
                 }
@@ -144,116 +150,88 @@ var Map = (function(){
             }
         });
     }
+    //监听班车查询
+    var listenBanche = function () {
+        $("#banche-search").on("click", function(){
+            lineSearch();
+            Banche.init();
+            $(".jichangbashi-panel").removeClass("hide");
+        });
+    }
+    /*公交线路查询*/
+    function lineSearch() {
+        var busLineName = document.getElementById('busLineName').value;
+        if(!busLineName) return;
+        //实例化公交线路查询类，只取回一条路线
+        if(!linesearch){
+            linesearch = new AMap.LineSearch({
+                pageIndex: 1,
+                city: '北京',
+                pageSize: 1,
+                extensions: 'all'
+            });
+        }
+        //搜索“536”相关公交线路
+        linesearch.search(busLineName, function(status, result) {
+            map.clearMap()
+            if (status === 'complete' && result.info === 'OK') {
+                lineSearch_Callback(result);
+            } else {
+                alert(result);
+            }
+        });
+    }
+    /*公交路线查询服务返回数据解析概况*/
+    function lineSearch_Callback(data) {
+        var lineArr = data.lineInfo;
+        var lineNum = data.lineInfo.length;
+        if (lineNum == 0) {
+        } else {
+            for (var i = 0; i < lineNum; i++) {
+                var pathArr = lineArr[i].path;
+                var stops = lineArr[i].via_stops;
+                var startPot = stops[0].location;
+                var endPot = stops[stops.length - 1].location;
+                if (i == 0) //作为示例，只绘制一条线路
+                    drawbusLine(startPot, endPot, pathArr);
+
+            }
+        }
+    }
+    /*绘制路线*/
+    function drawbusLine(startPot, endPot, BusArr) {
+        //绘制起点，终点
+        new AMap.Marker({
+            map: map,
+            position: startPot, //基点位置
+            icon: "https://webapi.amap.com/theme/v1.3/markers/n/start.png",
+            zIndex: 10
+        });
+        new AMap.Marker({
+            map: map,
+            position: endPot, //基点位置
+            icon: "https://webapi.amap.com/theme/v1.3/markers/n/end.png",
+            zIndex: 10
+        });
+        //绘制乘车的路线
+        busPolyline = new AMap.Polyline({
+            map: map,
+            path: BusArr,
+
+            strokeColor: "#09f",//线颜色
+            strokeOpacity: 0.8,//线透明度
+            isOutline:true,
+            outlineColor:'white',
+            strokeWeight: 6//线宽
+        });
+        map.setFitView();
+    }
     //监听线路规划
     var listenRoute = function () {
-        $(".palntype_tab.icondirtip").on("click", function(){
+        $(".palntype_tab.icondirtip").on("click", function () {
             $(".palntype_tab.icondirtip").removeClass("current");
             $(this).addClass("current");
         });
-
-        //路径交换
-        $("#dir_exchange").on("click", function(){
-            var frominput = $("#dir_from_ipt");
-            var toinput = $("#dir_to_ipt");
-            var fromVal = frominput.val();
-            var toVal = toinput.val();
-            frominput.val(toVal);
-            toinput.val(fromVal);
-            activeRouteSearch();
-        });
-
-//查询按钮
-        function activeRouteSearch(){
-            var frominput = $("#dir_from_ipt");
-            var toinput = $("#dir_to_ipt");
-            var fromVal = frominput.val();
-            var toVal = toinput.val();
-            var type = $(".palntype_tab.icondirtip.current").data('type');
-            // $(".time-select .form-control").val()
-            if( type == "car"){
-                //构造路线导航类
-                if( driving != undefined){
-                    driving.clear();
-                    $("#routeInfo").html("");
-                }
-                driving = new AMap.Driving({
-                    map: map,
-                    panel: "routeInfo"
-                });
-                // 根据起终点名称规划驾车导航路线
-                driving.search([
-                    {keyword: fromVal, city:''},
-                    {keyword: toVal, city:''}
-                ], function(status, result) {
-                    // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
-                    if (status === 'complete') {
-                        console.log('绘制驾车路线完成')
-                    } else {
-                        console.log('获取驾车数据失败：' + result)
-                    }
-                    setTimeout(function(){
-                        $(".amap-call").remove();
-                    }, 500)
-                });
-            }else if( type == 'bus'){
-                var transOptions = {
-                    map: map,
-                    city: cityinfo.citycode,
-                    panel: 'routeInfo',
-                    policy: AMap.TransferPolicy.LEAST_TIME //乘车策略
-                };
-                if( transfer != undefined){
-                    transfer.clear();
-                    $("#routeInfo").html("");
-                }
-                //构造公交换乘类
-                transfer = new AMap.Transfer(transOptions);
-                //根据起、终点名称查询公交换乘路线
-                transfer.search([
-                    {keyword: fromVal, city:''},
-                    {keyword: toVal, city:''}
-                ], function(status, result) {
-                    // result即是对应的公交路线数据信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_TransferResult
-                    if (status === 'complete') {
-                        console.log('绘制公交路线完成')
-                    } else {
-                        console.log('公交路线数据查询失败' + result)
-                    }
-                    setTimeout(function(){
-                        $(".amap-call").remove();
-                        $(".planTitle ul.clearfix").remove();
-                    }, 500)
-
-                });
-            }else if( type == 'walk'){
-                if( walking != undefined){
-                    walking.clear();
-                    $("#routeInfo").html("");
-                }
-                //步行导航
-                walking = new AMap.Walking({
-                    map: map,
-                    panel: "routeInfo"
-                });
-                walking.search([
-                    {keyword: fromVal, city:''},
-                    {keyword: toVal, city:''}
-                ], function(status, result) {
-                    // result即是对应的步行路线数据信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_WalkingResult
-                    if (status === 'complete') {
-                        console.log('绘制步行路线完成')
-                    } else {
-                        console.log('步行路线数据查询失败' + result)
-                    }
-                    setTimeout(function(){
-                        $(".amap-call").remove();
-                        // $(".planTitle ul.clearfix").remove();
-                    }, 500)
-                });
-            }
-
-        }
-        $(".dir_submit").on("click", activeRouteSearch);
     }
     //监听导航栏
     var listenNav = function () {
@@ -270,8 +248,6 @@ var Map = (function(){
 
         });
     }
-
-
     //监听选中模块
     var listenItemClick = function(){
         function select(e) {

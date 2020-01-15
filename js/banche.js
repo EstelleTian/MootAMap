@@ -40,7 +40,7 @@ var Banche = (function(){
             var table =  drawTable(data);
             tables += table;
         });
-        container.append(tables);
+        container.html(tables);
     };
 
 
@@ -102,6 +102,6 @@ var Banche = (function(){
     }
 })();
 
-$(document).ready(function(){
-    Banche.init();
-});
+// $(document).ready(function(){
+//     Banche.init();
+// });
