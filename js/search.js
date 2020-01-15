@@ -1,14 +1,8 @@
-/**
- * 创建地图
- * */
 var map = new AMap.Map('container', {
-    zoom: 13, //级别
+    zoom: 13,
     resizeEnable: true,
 });
 
-/**
- *
- * */
 AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
     var poiPicker = new PoiPicker({
         //city:'北京',
@@ -124,36 +118,5 @@ document.getElementById('lukaung-btn').onclick = function(e){
         e.target.innerHTML = "隐藏实时路况";
     }
 };
-
-$('#search .fa-dir').on('click',function () {
-    $('#amapBox').hide();
-    $('#dirBox').show();
-});
-$('#dirBox .dir_close').on('click',function () {
-    $('#dirBox').hide();
-});
-$('#search #searchipt').on('click',function () {
-    var $this = $(this);
-    var val = $this.val();
-    if(val == ""){
-        $('#amapBox').show();
-    }else {
-        $('#amapBox').hide();
-    }
-});
-$('#search #searchipt').on('keyup',function () {
-    var $this = $(this);
-    var val = $this.val();
-    if(val == ""){
-        $('#amapBox').show();
-    }else {
-        $('#amapBox').hide();
-    }
-});
-$('#container').on('click',function (e) {
-    if($("#amapBox").is(':visible')){
-        $('#amapBox').hide();
-    }
-});
 
 

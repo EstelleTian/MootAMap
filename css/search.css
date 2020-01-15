@@ -5,14 +5,39 @@ body,
     height: 100%;
     margin: 0px;
     font-size: 13px;
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -o-flex-direction: column;
 }
-
+.hide{
+    display: none;
+}
+.body{
+    position: relative;
+    flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -o-flex: 1;
+}
 #pickerBox {
     position: absolute;
     z-index: 9999;
-    top: 50px;
-    right: 30px;
-    width: 300px;
+    top: 60px;
+    left: 13px;
+    width: 363px;
+}
+#routeBox {
+    position: absolute;
+    z-index: 9999;
+    top: 229px;
+    left: 13px;
+    width: 360px;
 }
 
 #pickerInput {
