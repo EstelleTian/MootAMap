@@ -3,6 +3,7 @@
 var map;
 var cityinfo;
 var driving;
+var drivingSec;
 var transfer;
 var walking;
 var linesearch;
@@ -232,6 +233,97 @@ var Map = (function(){
             $(".palntype_tab.icondirtip").removeClass("current");
             $(this).addClass("current");
         });
+        //查询按钮
+        function activeRouteSearch(){
+            var frominput = $("#dir_from_ipt");
+            var toinput = $("#dir_to_ipt");
+            var fromVal = frominput.val();
+            var toVal = toinput.val();
+            var type = $(".palntype_tab.icondirtip.current").data('type');
+            if( type == "car"){
+                //构造路线导航类
+                if( driving != undefined){
+                    driving.clear();
+                    $("#routeInfo").html("");
+                }
+                driving = new AMap.Driving({
+                    map: map,
+                    panel: "routeInfo"
+                });
+                // 根据起终点名称规划驾车导航路线
+                driving.search([
+                    {keyword: fromVal, city:''},
+                    {keyword: toVal, city:''}
+                ], function(status, result) {
+                    // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+                    if (status === 'complete') {
+                        console.log('绘制驾车路线完成')
+                    } else {
+                        console.log('获取驾车数据失败：' + result)
+                    }
+                    setTimeout(function(){
+                        $(".amap-call").remove();
+                    }, 500)
+                });
+            }else if( type == 'bus'){
+                var transOptions = {
+                    map: map,
+                    city: cityinfo.citycode,
+                    panel: 'routeInfo',
+                    policy: AMap.TransferPolicy.LEAST_TIME //乘车策略
+                };
+                if( transfer != undefined){
+                    transfer.clear();
+                    $("#routeInfo").html("");
+                }
+                //构造公交换乘类
+                transfer = new AMap.Transfer(transOptions);
+                //根据起、终点名称查询公交换乘路线
+                transfer.search([
+                    {keyword: fromVal, city:''},
+                    {keyword: toVal, city:''}
+                ], function(status, result) {
+                    // result即是对应的公交路线数据信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_TransferResult
+                    if (status === 'complete') {
+                        console.log('绘制公交路线完成')
+                    } else {
+                        console.log('公交路线数据查询失败' + result)
+                    }
+                    setTimeout(function(){
+                        $(".amap-call").remove();
+                        $(".planTitle ul.clearfix").remove();
+                    }, 500)
+
+                });
+            }else if( type == 'walk'){
+                if( walking != undefined){
+                    walking.clear();
+                    $("#routeInfo").html("");
+                }
+                //步行导航
+                walking = new AMap.Walking({
+                    map: map,
+                    panel: "routeInfo"
+                });
+                walking.search([
+                    {keyword: fromVal, city:''},
+                    {keyword: toVal, city:''}
+                ], function(status, result) {
+                    // result即是对应的步行路线数据信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_WalkingResult
+                    if (status === 'complete') {
+                        console.log('绘制步行路线完成')
+                    } else {
+                        console.log('步行路线数据查询失败' + result)
+                    }
+                    setTimeout(function(){
+                        $(".amap-call").remove();
+                        // $(".planTitle ul.clearfix").remove();
+                    }, 500)
+                });
+            }
+
+        }
+        $(".dir_submit").on("click", activeRouteSearch);
     }
     //监听导航栏
     var listenNav = function () {
@@ -275,6 +367,29 @@ var Map = (function(){
                 })
 
             }
+        })
+        $(".recommend-c.route .item").on("click", function(){
+            // 清除标记
+            var place = ["北京北站","张家口站","北京站","北京西站","天安门","清河站","北京大学","颐和园","西单","清华大学","协和医院"];
+            if( drivingSec != undefined ){
+                drivingSec.clear();
+            }
+            drivingSec = new AMap.Driving({
+                map: map,
+                panel: ""
+            });
+            // 根据起终点名称规划驾车导航路线
+            drivingSec.search([
+                {keyword: place[Math.floor(Math.random()*10)], city:''},
+                {keyword:  place[Math.floor(Math.random()*10)], city:''}
+            ], function(status, result) {
+                // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+                if (status === 'complete') {
+                    console.log('完成')
+                } else {
+                    console.log('失败：' + result)
+                }
+            });
         })
     }
     //模块切换

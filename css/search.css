@@ -110,6 +110,9 @@ ul.tabs.dir_tab li a.icon-walk {
     top: 0px;
     left: 210px;
 }
+.highlight{
+    background: #ffd060;
+}
 .bancheshik{
     position: relative;
 }

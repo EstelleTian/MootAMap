@@ -80,6 +80,9 @@ var Banche = (function(){
                 '<td>' +departureTime + '</td>'+
                 '<td>' + terminalTime+ '</td>'+
             '</tr>'
+            if(num==3){
+                tr = tr.replace('<tr>','<tr class="highlight">')
+            }
             tbody += tr;
         }
         tbody +='</tbody>';
