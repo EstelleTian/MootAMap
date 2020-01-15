@@ -241,15 +241,15 @@
                         <div class="around-panel panel" style="display: block;">
                             <div class="around-box real-height-box">
                                 <div class="recommend-c route clearfix">
-                                    <div class="item meishi-item" data-type="search" keyword="铁路"
+                                    <div class="item meishi-item" data-type="tielu" keyword="铁路"
                                          data-spm-anchor-id="0.0.0.i6.5fd81c4ehDDuzm">
                                         <div class="img-c"><img src="img/tielu.png"
                                                                 data-spm-anchor-id="0.0.0.i2.5fd81c4ehDDuzm"></div>
                                         <p class="name ellipsis">铁路</p></div>
-                                    <div class="item hotel-item" data-type="search" keyword="高速/国道/省道">
+                                    <div class="item hotel-item" data-type="gaosu" keyword="高速/国道/省道">
                                         <div class="img-c"><img src="img/gaosu.png"></div>
                                         <p class="name ellipsis">高速/国道/省道</p></div>
-                                    <div class="item scenic-item" data-type="search" keyword="城区">
+                                    <div class="item scenic-item" data-type="chengqu" keyword="城区">
                                         <div class="img-c"><img src="img/city.png"></div>
                                         <p class="name ellipsis">城区</p></div>
                                 </div>
@@ -520,7 +520,14 @@
     </div>
     <!--班车时刻输入模块-->
     <div class="filtercanvas bancheshike hide">
-        <div class="panel panel-default">
+        <div class="input-card" style="width:18rem;">
+            <div class="input-item">
+                <div class="input-item-prepend"><span class="input-item-text">线路名称</span></div>
+                <input id="busLineName" type="text" value="">
+            </div>
+            <input id="banche-search" type="button" class="btn" value="查询">
+        </div>
+        <div class="panel panel-default jichangbashi-panel hide">
             <!-- Default panel contents -->
             <div class="panel-heading">2月15日-2月18日(Feb 15 - Feb 18)</div>
             <div class="panel-body table-container"></div>
@@ -550,7 +557,7 @@
 <!--</div>-->
 <!--</div>-->
 <script type="text/javascript"
-        src='https://webapi.amap.com/maps?v=1.4.15&key=dcfd6955a1af7e5eda471cd4bf631724&plugin=AMap.Autocomplete&plugin=AMap.CitySearch&plugin=AMap.Driving&plugin=AMap.Transfer&plugin=AMap.Walking'></script>
+        src='https://webapi.amap.com/maps?v=1.4.15&key=dcfd6955a1af7e5eda471cd4bf631724&plugin=AMap.Autocomplete&plugin=AMap.CitySearch&plugin=AMap.Driving&plugin=AMap.Transfer&plugin=AMap.Walking&plugin=AMap.LineSearch'></script>
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 <!-- UI组件库 1.0 -->
 <script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>

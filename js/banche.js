@@ -40,7 +40,7 @@ var Banche = (function(){
             var table =  drawTable(data);
             tables += table;
         });
-        container.append(tables);
+        container.html(tables);
     };
 
 
@@ -80,6 +80,9 @@ var Banche = (function(){
                 '<td>' +departureTime + '</td>'+
                 '<td>' + terminalTime+ '</td>'+
             '</tr>'
+            if(num==3){
+                tr = tr.replace('<tr>','<tr class="highlight">')
+            }
             tbody += tr;
         }
         tbody +='</tbody>';
@@ -102,6 +105,6 @@ var Banche = (function(){
     }
 })();
 
-$(document).ready(function(){
-    Banche.init();
-});
+// $(document).ready(function(){
+//     Banche.init();
+// });
