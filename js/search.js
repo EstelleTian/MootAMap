@@ -93,6 +93,23 @@ var Map = (function(){
                        //          console.log('失败：' + result)
                        //      }
                        //  });
+                    }else if( key == "bancheshike" ){
+                        var driving2 = new AMap.Driving({
+                             map: map,
+                             panel: ""
+                         });
+                         // 根据起终点名称规划驾车导航路线
+                         driving2.search([
+                             {keyword: "北京航空航天大学", city:''},
+                             {keyword: "北京首都机场", city:''}
+                         ], function(status, result) {
+                             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+                             if (status === 'complete') {
+                                 console.log('完成')
+                             } else {
+                                 console.log('失败：' + result)
+                             }
+                         });
                     }
                 }else{
                     console.log(result)
