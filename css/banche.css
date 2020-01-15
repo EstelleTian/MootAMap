@@ -1,0 +1,43 @@
+
+.bancheshike {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    z-index: 6300;
+    overflow: hidden;
+    font-size: 16px;
+}
+.bancheshike .panel-heading {
+    text-align: center;
+}.bancheshike .panel-body {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.bancheshike .banchetable {
+    background: #ffffff;
+    margin-bottom: 0;
+    border-bottom: 1px dashed #6a788c;
+
+}
+.bancheshike .banchetable:last-child {
+    border-bottom: none;
+}
+.bancheshike .banchetable th,
+.bancheshike .banchetable td,
+.bancheshike .description{
+    text-align: center;
+}
+.bancheshike .description {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #333333;
+}
+.bancheshike .banchetable>thead>tr>th {
+    border: none;
+    font-weight: normal;
+}
+.bancheshike .table-container {
+    max-height: 600px;
+    overflow: auto;
+}
+
