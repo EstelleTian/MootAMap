@@ -5,202 +5,278 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>地图</title>
-    <!--<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />-->
+    <link rel="stylesheet" href="plugins/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="plugins/bootstrap-submenu/css/bootstrap-submenu.min.css"/>
     <link rel="stylesheet" href="css/search.css"/>
     <link rel="stylesheet" href="css/amapBox.css"/>
     <link rel="stylesheet" href="css/aroundbox.css"/>
 </head>
 
 <body>
-<!--搜索模块-->
-<section id="search" class="search">
-    <header class="searchbox">
-        <img class="usel logo"
-             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAYAAAA4E5OyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4RDlDOTA3RDJDQUExMUU3QUY3REU4MDc1M0MzNjY5RiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4RDlDOTA3RTJDQUExMUU3QUY3REU4MDc1M0MzNjY5RiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjhEOUM5MDdCMkNBQTExRTdBRjdERTgwNzUzQzM2NjlGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjhEOUM5MDdDMkNBQTExRTdBRjdERTgwNzUzQzM2NjlGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+RQc1VAAACpVJREFUeNrsnHts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"
-             draggable="false">
-        <div id="nearbybox">
-            <div id="nearby">
-                <span>在</span><span class="poiname">天安门...</span><span>周边搜</span>
-                <input type="text" id="nearbyipt" autocomplete="off"/>
-            </div>
-            <div id="nearbyclosewrap">
-                <i id="nearbyclose" class="iconfont icon-close"></i>
-            </div>
-            <div id="nearbybtn">
-                <i class="iconfont icon-search nearbylogo"></i>
-                <span id="nearbyloading" class="ring"></span>
-            </div>
-        </div>
-
-        <div class="iptbox">
-            <input type="text" id="searchipt" placeholder="搜索位置、公交站、地铁站" maxlength="256" autocomplete="off"/>
-
-            <div id="searchbtn" class="usel">
-                <i class="iconfont icon-search searchlogo icontip" title="搜索"></i>
-
-                <span id="searchloading" class="ring"></span>
-            </div>
-        </div>
-
-        <div class="direntry usel">
-            <img class="fa-dir icontip" title="路线"
-                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAkCAYAAABxE+FXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTdGRDQzNzk1MUE0MTFFNkJENThBRUM3QkJFQTlBNEMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTdGRDQzN0E1MUE0MTFFNkJENThBRUM3QkJFQTlBNEMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFN0ZENDM3NzUxQTQxMUU2QkQ1OEFFQzdCQkVBOUE0QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFN0ZENDM3ODUxQTQxMUU2QkQ1OEFFQzdCQkVBOUE0QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PrQHkWQAAAG5SURBVHja5Jg/KEVRHMfPfe+RpEgkw/MkUiKDwYCIRFGKzUp5A7IYrJJBBpNFPYmISGGQ9J56CwaDxWAji2LwL0We76nfIN0/597zx+BXn+Gdezqf3vnd3/mdrlWbyDDByAdp8AB6wBuTjJDgPAskQB1oA0s0ZkQ+Dvp//B4EUybkjWDOZnwG9OmUF4JNkO2QijVKhXI5X3wFxFzm5IE9UKxaPgl6BdYoBzsOuxNI3kQ5FY0WsKhCXgQ2QJbPtYbAhIyc53kVRAO+Q/OgK6ic1263RPWEqTqq/cpbwTSTD34MH4ACUXkJ5TnM1EQl2PZaL0QTeJ5LmdroAAtecp7nTqYnRkHcTT7G9Mas04MI5dsrMi5HsPaWqiX+rzxiYH1e81XU/Sro/TnjnVCXPEadrgHk2jxvBx+q5VG669UIzG1WJc8BA/RvLZM5LwMjdA/wE2lZeT0Y9nmFegGnYF9WHhco1ztwCa7BDXhWte1O4k9wDpLg1mSdX4F1cG/ykOGHxy44cmlEWuRfYJm22vjZvuVXrEp+AVJ/0dXe6eKptaU+2ozxLxPH4Em3/PDXZ5BX2uoTmW37FmAA/hxExSsxtXsAAAAASUVORK5CYII="
-                 draggable="false">
-            <i class="close-btn iconfont icon-close"></i>
-        </div>
-    </header>
-    <div class="amap-search-panctrl">
-
-    </div>
-    <div class="dtrigger dragtop"></div>
-    <div class="dtrigger dragbottom"></div>
-    <div class="dtrigger dragleft"></div>
-    <div class="dtrigger dragright"></div>
-</section>
-<section id="amapBox" class="amap-box fs-box" style="display: block; overflow: visible;">
-    <div class="translate-box" data-slide-d="0" style="transform: translateY(0px);">
-        <section class="tab-c panel-box">
-            <ul class="tab-list panel-box-list clearfix">
-                <li class="index-tab panel-box-tab tab" data-type="/dir" fwd="/dir"><span class="dirico"></span> <span
-                        class="nav-txt">路线</span></li>
-                <li class="around-tab panel-box-tab tab cur" data-type="/around" fwd="around"><i
-                        class="iconfont icon-search"></i> <span class="nav-txt">热搜</span></li>
-                <li class="faves-tab panel-box-tab tab" data-type="/faves" fwd="faves"><span class="starico"></span>
-                    <span class="nav-txt">收藏</span></li>
-                <li class="place-tab panel-box-tab tab" data-type="/place" fwd="place"><span class="starico"></span>
-                    <span class="nav-txt">详情</span></li>
+<div class="header">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="nav-li dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                静态内容 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="click-item" data-key="guanjianjiedian"><a href="#">关键节点展示</a></li>
+                <li class="click-item" data-key="guanjiantongdao"><a href="#">关键通道展示</a></li>
             </ul>
-            <div class="panel-list">
-                <div class="index-panel panel" style="display: none;"></div>
-                <div class="around-panel panel" style="display: block;">
-                    <div id="aroundbox" class="around-box real-height-box">
-                        <div class="recommend-c clearfix">
-                            <div class="item meishi-item" data-type="search" keyword="机场"
-                                 data-spm-anchor-id="0.0.0.i6.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="img/search_airport.png"
-                                                        data-spm-anchor-id="0.0.0.i2.5fd81c4ehDDuzm"></div>
-                                <p class="name ellipsis">机场</p></div>
-                            <div class="item hotel-item" data-type="search" keyword="火车站">
-                                <div class="img-c"><img src="img/search_train_station.png"></div>
-                                <p class="name ellipsis">火车站</p></div>
-                            <div class="item scenic-item" data-type="search" keyword="汽车站">
-                                <div class="img-c"><img src="img/search_bus_station.png"></div>
-                                <p class="name ellipsis">汽车站</p></div>
-                            <div class="item cinema-item" data-type="search" keyword="服务区"
-                                 data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="img/search_service_area.png"></div>
-                                <p class="name ellipsis">服务区</p></div>
-                            <div class="item cinema-item" data-type="search" keyword="比赛场馆"
-                                 data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="img/search_stadium.png"></div>
-                                <p class="name ellipsis">比赛场馆</p></div>
-                            <div class="item cinema-item" data-type="search" keyword="运行中心"
-                                 data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="img/search_operation_center.png"></div>
-                                <p class="name ellipsis">运行中心</p></div>
-                            <div class="item cinema-item" data-type="search" keyword="媒体中心"
-                                 data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="img/search_media.png"></div>
-                                <p class="name ellipsis">媒体中心</p></div>
-                            <div class="item cinema-item" data-type="search" keyword="酒店"
-                                 data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_hotel.png"></div>
-                                <p class="name ellipsis">酒店</p></div>
-                            <div class="item cinema-item" data-type="search" keyword="医院"
-                                 data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
-                                <div class="img-c"><img src="img/search_hospital.png"></div>
-                                <p class="name ellipsis">医院</p></div>
-
-                        </div>
-                        <div class="poi-history-c">
-                            <ul class="poi-history">
-                                <li class="item" data-id="0"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span
-                                        class="name ellipsis">美食</span><span class="del-item"><i
-                                        class="iconfont icon-delete"></i></span></li>
-                                <li class="item" data-id="1"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span
-                                        class="name ellipsis">火车站</span><span class="del-item"><i
-                                        class="iconfont icon-delete"></i></span></li>
-                                <li class="item" data-id="2"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span
-                                        class="name ellipsis">京九线</span><span class="del-item"><i
-                                        class="iconfont icon-delete"></i></span></li>
-                                <li class="item" data-id="3"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span
-                                        class="name ellipsis">地铁13号线</span><span class="del-item"><i
-                                        class="iconfont icon-delete"></i></span></li>
-                            </ul>
-                            <div style="display:none" class="del-all clearfix"><span class="btn">删除所有历史记录</span></div>
-                        </div>
-                        <div class="active_banner"></div>
-
+        </li>
+        <li role="presentation" class="nav-li dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                动态内容 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="click-item" data-key="jingzhanggaotie"><a href="#">京张高铁</a></li>
+                <li class="click-item" data-key="jichangbashi"><a href="#">机场巴士</a></li>
+                <li class="click-item" data-key="lukuang"><a href="#">北京市交通路况</a></li>
+            </ul>
+        </li>
+        <li role="presentation" class="nav-li click-item" data-key="lujingguihua"><a href="#">路径规划</a></li>
+        <li role="presentation" class="nav-li click-item" data-key="bancheshike"><a href="#">班车时刻</a></li>
+    </ul>
+    <div id="loginbox" class="usel loginbox" style="left: 1850px; top: 15px;">
+        <div class="avatar logintip" data-spm-anchor-id="0.0.0.i4.42e51c4e1iVbJz">  </div>
+        <div class="user-panel" style="opacity: 0; transform: translateY(0px); display: none;">
+            <div class="user-triangle"></div> <div class="user-head">  <div class="login-banner clearfix">
+            <div class="text-notice">
+                <p>登录后可享受</p> <p>更多贴心服务</p> </div>
+            <div class="login-btn">登录</div>
+        </div>
+        </div>
+            <div class="func-list">
+                <div class="func-item road-book" data-type="road-book">
+                    <i class="iconfont icon-lushu"></i>
+                    <span class="text-notice">路书<span class="red-point" style="display: inline;"></span> </span>
+                </div>
+            </div>
+        </div>
+        <div class="recommend_entry" id="to_lushu" style="opacity: 0; display: none; transform: translateY(0px);">
+            <div class="recom_close"> <i class="iconfont icon-close" data-spm-anchor-id="0.0.0.i0.42e51c4e1iVbJz"></i> </div> </div>
+    </div>
+</div>
+<div class="body">
+    <div id="container" class="map" tabindex="0"></div>
+    <!--搜索模块-->
+    <div class="keyword-search filtercanvas hide">
+        <section id="search" class="search">
+            <header class="searchbox">
+                <img class="usel logo"
+                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAYAAAA4E5OyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4RDlDOTA3RDJDQUExMUU3QUY3REU4MDc1M0MzNjY5RiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4RDlDOTA3RTJDQUExMUU3QUY3REU4MDc1M0MzNjY5RiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjhEOUM5MDdCMkNBQTExRTdBRjdERTgwNzUzQzM2NjlGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjhEOUM5MDdDMkNBQTExRTdBRjdERTgwNzUzQzM2NjlGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+RQc1VAAACpVJREFUeNrsnHts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"
+                     draggable="false">
+                <div id="nearbybox">
+                    <div id="nearby">
+                        <span>在</span><span class="poiname">天安门...</span><span>周边搜</span>
+                        <input type="text" id="nearbyipt" autocomplete="off"/>
+                    </div>
+                    <div id="nearbyclosewrap">
+                        <i id="nearbyclose" class="iconfont icon-close"></i>
+                    </div>
+                    <div id="nearbybtn">
+                        <i class="iconfont icon-search nearbylogo"></i>
+                        <span id="nearbyloading" class="ring"></span>
                     </div>
                 </div>
-                <div class="faves-panel panel"></div>
-                <div class="place-panel panel" style="display: block;"></div>
+
+                <div class="iptbox">
+                    <input type="text" id="searchipt" placeholder="搜索位置、公交站、地铁站" maxlength="256" autocomplete="off"/>
+
+                    <div id="searchbtn" class="usel">
+                        <i class="iconfont icon-search searchlogo icontip" title="搜索"></i>
+
+                        <span id="searchloading" class="ring"></span>
+                    </div>
+                </div>
+
+                <div class="direntry usel">
+                    <img class="fa-dir icontip" title="路径规划"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAkCAYAAABxE+FXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTdGRDQzNzk1MUE0MTFFNkJENThBRUM3QkJFQTlBNEMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTdGRDQzN0E1MUE0MTFFNkJENThBRUM3QkJFQTlBNEMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFN0ZENDM3NzUxQTQxMUU2QkQ1OEFFQzdCQkVBOUE0QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFN0ZENDM3ODUxQTQxMUU2QkQ1OEFFQzdCQkVBOUE0QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PrQHkWQAAAG5SURBVHja5Jg/KEVRHMfPfe+RpEgkw/MkUiKDwYCIRFGKzUp5A7IYrJJBBpNFPYmISGGQ9J56CwaDxWAji2LwL0We76nfIN0/597zx+BXn+Gdezqf3vnd3/mdrlWbyDDByAdp8AB6wBuTjJDgPAskQB1oA0s0ZkQ+Dvp//B4EUybkjWDOZnwG9OmUF4JNkO2QijVKhXI5X3wFxFzm5IE9UKxaPgl6BdYoBzsOuxNI3kQ5FY0WsKhCXgQ2QJbPtYbAhIyc53kVRAO+Q/OgK6ic1263RPWEqTqq/cpbwTSTD34MH4ACUXkJ5TnM1EQl2PZaL0QTeJ5LmdroAAtecp7nTqYnRkHcTT7G9Mas04MI5dsrMi5HsPaWqiX+rzxiYH1e81XU/Sro/TnjnVCXPEadrgHk2jxvBx+q5VG669UIzG1WJc8BA/RvLZM5LwMjdA/wE2lZeT0Y9nmFegGnYF9WHhco1ztwCa7BDXhWte1O4k9wDpLg1mSdX4F1cG/ykOGHxy44cmlEWuRfYJm22vjZvuVXrEp+AVJ/0dXe6eKptaU+2ozxLxPH4Em3/PDXZ5BX2uoTmW37FmAA/hxExSsxtXsAAAAASUVORK5CYII="
+                         draggable="false">
+                    <i class="close-btn iconfont icon-close"></i>
+                </div>
+            </header>
+            <div class="amap-search-panctrl">
+
+            </div>
+            <div class="dtrigger dragtop"></div>
+            <div class="dtrigger dragbottom"></div>
+            <div class="dtrigger dragleft"></div>
+            <div class="dtrigger dragright"></div>
+        </section>
+        <section id="amapBox" class="amap-box fs-box" style="display: block; overflow: visible;">
+            <div class="translate-box" data-slide-d="0" style="transform: translateY(0px);">
+                <section class="tab-c panel-box">
+                    <ul class="tab-list panel-box-list clearfix">
+                        <li class="index-tab panel-box-tab tab" data-type="/dir" fwd="/dir"><span class="dirico"></span> <span
+                                class="nav-txt">路线</span></li>
+                        <li class="around-tab panel-box-tab tab cur" data-type="/around" fwd="around"><i
+                                class="iconfont icon-search"></i> <span class="nav-txt">热搜</span></li>
+                        <li class="faves-tab panel-box-tab tab" data-type="/faves" fwd="faves"><span class="starico"></span>
+                            <span class="nav-txt">收藏</span></li>
+                        <li class="place-tab panel-box-tab tab" data-type="/place" fwd="place"><span class="starico"></span>
+                            <span class="nav-txt">详情</span></li>
+                    </ul>
+                    <div class="panel-list">
+                        <div class="index-panel panel" style="display: none;"></div>
+                        <div class="around-panel panel" style="display: block;">
+                            <div id="aroundbox" class="around-box real-height-box">
+                                <div class="recommend-c clearfix">
+                                    <div class="item meishi-item" data-type="search" keyword="机场"
+                                         data-spm-anchor-id="0.0.0.i6.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_airport.png"
+                                                                data-spm-anchor-id="0.0.0.i2.5fd81c4ehDDuzm"></div>
+                                        <p class="name ellipsis">机场</p></div>
+                                    <div class="item hotel-item" data-type="search" keyword="火车站">
+                                        <div class="img-c"><img src="img/search_train_station.png"></div>
+                                        <p class="name ellipsis">火车站</p></div>
+                                    <div class="item scenic-item" data-type="search" keyword="汽车站">
+                                        <div class="img-c"><img src="img/search_bus_station.png"></div>
+                                        <p class="name ellipsis">汽车站</p></div>
+                                    <div class="item cinema-item" data-type="search" keyword="服务区"
+                                         data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_service_area.png"></div>
+                                        <p class="name ellipsis">服务区</p></div>
+                                    <div class="item cinema-item" data-type="search" keyword="比赛场馆"
+                                         data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_stadium.png"></div>
+                                        <p class="name ellipsis">比赛场馆</p></div>
+                                    <div class="item cinema-item" data-type="search" keyword="运行中心"
+                                         data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_operation_center.png"></div>
+                                        <p class="name ellipsis">运行中心</p></div>
+                                    <div class="item cinema-item" data-type="search" keyword="媒体中心"
+                                         data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_media.png"></div>
+                                        <p class="name ellipsis">媒体中心</p></div>
+                                    <div class="item cinema-item" data-type="search" keyword="酒店"
+                                         data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="https://a.amap.com/pc/static/img/search_hotel.png"></div>
+                                        <p class="name ellipsis">酒店</p></div>
+                                    <div class="item cinema-item" data-type="search" keyword="医院"
+                                         data-spm-anchor-id="0.0.0.i1.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_hospital.png"></div>
+                                        <p class="name ellipsis">医院</p></div>
+                                </div>
+
+                                <div class="recommend-c route clearfix">
+                                    <div class="item meishi-item" data-type="search" keyword="铁路"
+                                         data-spm-anchor-id="0.0.0.i6.5fd81c4ehDDuzm">
+                                        <div class="img-c"><img src="img/search_airport.png"
+                                                                data-spm-anchor-id="0.0.0.i2.5fd81c4ehDDuzm"></div>
+                                        <p class="name ellipsis">铁路</p></div>
+                                    <div class="item hotel-item" data-type="search" keyword="高速/国道/省道">
+                                        <div class="img-c"><img src="img/search_train_station.png"></div>
+                                        <p class="name ellipsis">高速/国道/省道</p></div>
+                                    <div class="item scenic-item" data-type="search" keyword="城区">
+                                        <div class="img-c"><img src="img/search_bus_station.png"></div>
+                                        <p class="name ellipsis">城区</p></div>
+                                </div>
+                                <!--<div class="poi-history-c">-->
+                                <!--<ul class="poi-history">-->
+                                <!--<li class="item" data-id="0"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span-->
+                                <!--class="name ellipsis">美食</span><span class="del-item"><i-->
+                                <!--class="iconfont icon-delete"></i></span></li>-->
+                                <!--<li class="item" data-id="1"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span-->
+                                <!--class="name ellipsis">火车站</span><span class="del-item"><i-->
+                                <!--class="iconfont icon-delete"></i></span></li>-->
+                                <!--<li class="item" data-id="2"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span-->
+                                <!--class="name ellipsis">京九线</span><span class="del-item"><i-->
+                                <!--class="iconfont icon-delete"></i></span></li>-->
+                                <!--<li class="item" data-id="3"><span class="clock-icon"><i class="iconfont icon-time"></i></span><span-->
+                                <!--class="name ellipsis">地铁13号线</span><span class="del-item"><i-->
+                                <!--class="iconfont icon-delete"></i></span></li>-->
+                                <!--</ul>-->
+                                <!--<div style="display:none" class="del-all clearfix"><span class="btn">删除所有历史记录</span></div>-->
+                                <!--</div>-->
+                                <div class="active_banner"></div>
+
+                            </div>
+                        </div>
+                        <div class="faves-panel panel"></div>
+                        <div class="place-panel panel" style="display: block;"></div>
+                    </div>
+                </section>
             </div>
         </section>
     </div>
-</section>
-
-<div id="container" class="map" tabindex="0"></div>
-<div id="dirBox" style="display: none">
-    <div id="planForm">
-        <ul class="tabs dir_tab col3 z-depth-1 clearfix" id="trafficTab">
-            <li>
-                <a id="carTab" class="palntype_tab icon-car icondirtip current" href="javascript:void(0)" data-type="car"></a>
-            </li>
-            <li>
-                <a id="busTab" class="palntype_tab icon-bus icondirtip" href="javascript:void(0)" data-type="bus"></a>
-            </li>
-            <li>
-                <a id="walkTab" class="palntype_tab icon-walk icondirtip" href="javascript:void(0)" data-type="walk"></a>
-            </li>
-        </ul>
-        <i class="dir_close iconfont icon-close" data-spm-anchor-id="0.0.0.i2.42e51c4eEIOYbj"></i>
-        <div class="line-search">
-            <div class="line-search-left icon_exchange" id="dir_exchange">
-                <i class="iconfont icon-switchroute"></i>
+    <!--路径规划输入模块-->
+    <div id="dirBox" class="filtercanvas lujingguihua hide">
+        <div id="planForm">
+            <ul class="tabs dir_tab col3 z-depth-1 clearfix" id="trafficTab">
+                <li>
+                    <a id="carTab" class="palntype_tab icon-car icondirtip" href="javascript:void(0)" data-type="car"></a>
+                </li>
+                <li>
+                    <a id="busTab" class="palntype_tab icon-bus icondirtip current" href="javascript:void(0)" data-type="bus"></a>
+                </li>
+                <li>
+                    <a id="walkTab" class="palntype_tab icon-walk icondirtip" href="javascript:void(0)" data-type="walk"></a>
+                </li>
+            </ul>
+            <i class="dir_close iconfont icon-close" data-spm-anchor-id="0.0.0.i2.42e51c4eEIOYbj"></i>
+            <div class="line-search">
+                <div class="line-search-left icon_exchange" id="dir_exchange">
+                    <i class="iconfont icon-switchroute"></i>
+                </div>
+                <div class="line-search-form">
+                    <p class="line_serch_ipt line-search-from">
+                        <label>起 </label>
+                        <input type="text" class="dir_ipt" id="dir_from_ipt" dirtype="from" placeholder="请输入起点" value="" autocomplete="off" data-spm-anchor-id="0.0.0.i8.42e51c4eEIOYbj">
+                        <span class="del-item" style="display: none;"></span>
+                    </p>
+                    <div class="passList"></div>
+                    <p class="line_serch_ipt line-search-to">
+                        <label>终 </label>
+                        <input type="text" class="dir_ipt" id="dir_to_ipt" dirtype="to" placeholder="请输入终点" value="" autocomplete="off">
+                        <span class="del-item" style="display: none;"></span>
+                    </p>
+                    <p class="line-search-submit">
+                        <!--<a href="javascript:void(0)" class="line-search-clear none">清除路线</a>-->
+                        <a href="javascript:void(0)" class="dir_submit">查询</a>
+                        <span class="fa-spin"></span>
+                    </p>
+                </div>
+                <!--<a href="javascript:void(0)" class="line-search-right icon_add" id="via_add"></a>-->
             </div>
-            <div class="line-search-form">
-                <p class="line_serch_ipt line-search-from">
-                    <label>起 </label>
-                    <input type="text" class="dir_ipt" id="dir_from_ipt" dirtype="from" placeholder="请输入起点" value="" autocomplete="off" data-spm-anchor-id="0.0.0.i8.42e51c4eEIOYbj">
-                    <span class="del-item" style="display: none;"></span>
-                </p>
-                <div class="passList"></div>
-                <p class="line_serch_ipt line-search-to">
-                    <label>终 </label>
-                    <input type="text" class="dir_ipt" id="dir_to_ipt" dirtype="to" placeholder="请输入终点" value="" autocomplete="off">
-                    <span class="del-item" style="display: none;"></span>
-                </p>
-                <p class="line-search-submit">
-                    <a href="javascript:void(0)" class="line-search-clear none">清除路线</a>
-                    <a href="javascript:void(0)" class="dir_submit">开车去</a>
-                    <span class="fa-spin"></span>
-                </p>
-            </div>
-            <a href="javascript:void(0)" class="line-search-right icon_add" id="via_add"></a>
         </div>
     </div>
+    <!--班车时刻输入模块-->
+    <div class="filtercanvas bancheshike hide">
+
+    </div>
+
+    <div id="pickerBox">
+        <div id="poiInfo"></div>
+    </div>
+    <div id="routeBox" class="filtercanvas hide">
+        <div id="routeInfo"></div>
+    </div>
+
 </div>
 
-<div id="pickerBox">
-    <!--<input id="pickerInput" placeholder="输入关键字选取地点"/>-->
-    <div id="poiInfo"></div>
-</div>
-<div class="input-card" style="width:24rem;">
-    <h4>设置地图当前行政区</h4>
-    <div class="input-item">
-        <input id='city-name' placeholder="北京市" type="text" style="margin-right:1rem;">
-        <button class="btn" id="query">去指定城市</button>
-    </div>
-    <div class="input-item">
-        <button class="btn" id="lukaung-btn">显示实时路况</button>
-    </div>
-</div>
+
+<!--<div class="input-card" style="width:24rem;">-->
+<!--<h4>设置地图当前行政区</h4>-->
+<!--<div class="input-item">-->
+<!--<input id='city-name' placeholder="北京市" type="text" style="margin-right:1rem;">-->
+<!--<button class="btn" id="query">去指定城市</button>-->
+<!--</div>-->
+<!--<div class="input-item">-->
+<!--<button class="btn" id="lukaung-btn">显示实时路况</button>-->
+<!--</div>-->
+<!--</div>-->
 <script type="text/javascript"
-        src='https://webapi.amap.com/maps?v=1.4.15&key=dcfd6955a1af7e5eda471cd4bf631724&plugin=AMap.Autocomplete'></script>
+        src='https://webapi.amap.com/maps?v=1.4.15&key=dcfd6955a1af7e5eda471cd4bf631724&plugin=AMap.Autocomplete&plugin=AMap.CitySearch&plugin=AMap.Driving&plugin=AMap.Transfer&plugin=AMap.Walking'></script>
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 <!-- UI组件库 1.0 -->
 <script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+<script type="text/javascript" src="plugins/jquery/jquery.min.3.3.1.js"></script>
+<script type="text/javascript" src="plugins/bootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="plugins/bootstrap/js/bootstrap4.min.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-submenu/js/bootstrap-submenu.min.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-submenu/js/bootstrap-hover-dropdown.min.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
 
 </body>
