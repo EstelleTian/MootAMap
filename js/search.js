@@ -33,7 +33,9 @@ var Map = (function(){
         $(".jichangbashi-panel").addClass("hide");
         //初始化地图实例
         map = new AMap.Map('container', {
+            zoom: 12,
             resizeEnable: true,
+            // mapStyle: "amap://styles/blue"
         });
 
         AMap.plugin('AMap.Geolocation', function() {
@@ -137,6 +139,7 @@ var Map = (function(){
                     map = new AMap.Map('container', {
                         zoom: 12,
                         resizeEnable: true,
+                        // mapStyle: "amap://styles/blue"
                     });
                     //地图显示当前城市
                     // map.setBounds(citybounds);
@@ -232,6 +235,16 @@ var Map = (function(){
         $(".palntype_tab.icondirtip").on("click", function () {
             $(".palntype_tab.icondirtip").removeClass("current");
             $(this).addClass("current");
+        });
+        //路径交换
+        $("#dir_exchange").on("click", function(){
+            var frominput = $("#dir_from_ipt");
+            var toinput = $("#dir_to_ipt");
+            var fromVal = frominput.val();
+            var toVal = toinput.val();
+            frominput.val(toVal);
+            toinput.val(fromVal);
+            activeRouteSearch();
         });
         //查询按钮
         function activeRouteSearch(){
