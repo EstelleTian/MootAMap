@@ -169,9 +169,14 @@
 #loginbox .func-list .func-item .shenfen {
     display: inline-block;
 }
-
+.shenfen-list a {
+    color: #333!important;
+}
+.shenfen-list a:hover {
+    color: #ffffff!important;
+}
 .shenfen-list a.select {
-    color: #52acf6;
+    color: #274c8c;
 }
 
 #loginbox .func-list .func-item .text-notice {
@@ -244,7 +249,7 @@
 }
 
 #loginbox .func-list .func-item:hover .iconfont, #loginbox .func-list .func-item:hover .text-notice {
-    color: #009cf9
+    color: #274c8c
 }
 
 #loginbox .func-list .func-item.set-faves.checked .icon-star {
@@ -288,7 +293,7 @@
 }
 
 .theme_item.cur .theme_img {
-    border: 1px solid #009cf9
+    border: 1px solid #274c8c
 }
 
 .theme_check {
@@ -296,7 +301,7 @@
     position: absolute;
     width: 100%;
     height: 16px;
-    background: #009cf9;
+    background: #274c8c;
     bottom: 0;
     opacity: .85
 }
@@ -325,5 +330,5 @@
 }
 
 .theme_item.cur .theme_item_name {
-    color: #009cf9
+    color: #274c8c
 }
